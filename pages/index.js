@@ -22,8 +22,8 @@ export default function Home() {
   };
 
   const logoStyle = {
-    width: "120px",
-    height: "120px",
+    width: "150px",
+    height: "150px",
     marginBottom: "20px",
   };
 
@@ -31,7 +31,7 @@ export default function Home() {
     <div style={containerStyle}>
       {/* شعار المطبعة */}
       <img
-        src="https://cdn-icons-png.flaticon.com/512/29/29302.png" 
+        src="https://copilot.microsoft.com/th/id/BCO.6ba48088-92e9-4ae9-b100-517488d62e09.png"
         alt="لوجو مطبعة الرحاب"
         style={logoStyle}
       />
