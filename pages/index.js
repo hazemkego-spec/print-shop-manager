@@ -22,22 +22,25 @@ export default function Home() {
   };
 
   const logoStyle = {
-    width: "100px",
-    height: "100px",
+    width: "120px",
+    height: "120px",
     marginBottom: "20px",
   };
 
   return (
     <div style={containerStyle}>
-      {/* شعار أو أيقونة */}
+      {/* شعار المطبعة */}
       <img
-        src="https://cdn-icons-png.flaticon.com/512/29/29302.png"
-        alt="شعار الطابعة"
+        src="https://cdn-icons-png.flaticon.com/512/29/29302.png" 
+        alt="لوجو مطبعة الرحاب"
         style={logoStyle}
       />
 
-      <h1>مرحبًا بك في نظام إدارة المطبعة</h1>
+      {/* اسم المطبعة */}
+      <h1>مطبعة الرحاب</h1>
+      <p>مرحبًا بك في نظام إدارة المطبعة</p>
       <p>اضغط على الزر بالأسفل لتسجيل طلبك كمدرس</p>
+
       <Link href="/teacher">
         <button style={buttonStyle}>ابدأ تسجيل طلبك</button>
       </Link>
