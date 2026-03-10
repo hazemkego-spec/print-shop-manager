@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Teacher() {
@@ -6,7 +7,7 @@ export default function Teacher() {
     subject: "",
     copies: "",
     pagesPerCopy: "",
-    pricePerPage: 0, // هنحدد السعر لكل مدرس مسبقًا
+    pricePerPage: "",
     paid: false,
   });
 
@@ -15,7 +16,7 @@ export default function Teacher() {
   const calculatePrice = () => {
     const copies = parseInt(teacher.copies) || 0;
     const pages = parseInt(teacher.pagesPerCopy) || 0;
-    const price = teacher.pricePerPage || 0;
+    const price = parseFloat(teacher.pricePerPage) || 0;
     const total = copies * pages * price;
     setTotalPrice(total);
   };
@@ -26,7 +27,7 @@ export default function Teacher() {
 المادة: ${teacher.subject}
 عدد النسخ: ${teacher.copies}
 عدد أوراق النسخة: ${teacher.pagesPerCopy}
-السعر للصفحة: ${teacher.pricePerPage} جنيه
+سعر الصفحة: ${teacher.pricePerPage} جنيه
 الإجمالي: ${totalPrice} جنيه
 حالة الدفع: ${teacher.paid ? "مدفوع" : "غير مدفوع"}`;
 
@@ -34,53 +35,31 @@ export default function Teacher() {
     window.open(url, "_blank");
   };
 
+  const buttonStyle = {
+    padding: "10px 15px",
+    backgroundColor: "#0070f3",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    fontSize: "14px",
+  };
+
+  const navStyle = {
+    marginBottom: "20px",
+    display: "flex",
+    gap: "10px",
+    flexWrap: "wrap",
+  };
+
   return (
     <div style={{ padding: 20 }}>
-      <h1>تسجيل طلب طباعة للمدرس</h1>
-      <input
-        type="text"
-        placeholder="اسم المدرس"
-        value={teacher.name}
-        onChange={(e) => setTeacher({ ...teacher, name: e.target.value })}
-      />
-      <input
-        type="text"
-        placeholder="اسم المادة"
-        value={teacher.subject}
-        onChange={(e) => setTeacher({ ...teacher, subject: e.target.value })}
-      />
-      <input
-        type="number"
-        placeholder="عدد النسخ"
-        value={teacher.copies}
-        onChange={(e) => setTeacher({ ...teacher, copies: e.target.value })}
-      />
-      <input
-        type="number"
-        placeholder="عدد أوراق النسخة"
-        value={teacher.pagesPerCopy}
-        onChange={(e) => setTeacher({ ...teacher, pagesPerCopy: e.target.value })}
-      />
-      <input
-        type="number"
-        placeholder="سعر الصفحة (جنيه)"
-        value={teacher.pricePerPage}
-        onChange={(e) => setTeacher({ ...teacher, pricePerPage: e.target.value })}
-      />
+      <nav style={navStyle}>
+        <Link href="/"><button style={buttonStyle}>الرئيسية</button></Link>
+        <Link href="/inventory"><button style={buttonStyle}>المخزون</button></Link>
+        <Link href="/customers"><button style={buttonStyle}>العملاء</button></Link>
+        <Link href="/invoices"><button style={buttonStyle}>الفواتير</button></Link>
+        <Link href="/teacher"><button style={buttonStyle}>المدرس</button></Link>
+      </nav>
 
-      <button onClick={calculatePrice}>احسب السعر</button>
-      <h3>الإجمالي: {totalPrice} جنيه</h3>
-
-      <label>
-        <input
-          type="checkbox"
-          checked={teacher.paid}
-          onChange={(e) => setTeacher({ ...teacher, paid: e.target.checked })}
-        />
-        تم الدفع
-      </label>
-
-      <button onClick={sendWhatsApp}>إرسال الطلب عبر واتساب</button>
-    </div>
-  );
-}
+      <h1>تسجيل طلب طباعة لل
