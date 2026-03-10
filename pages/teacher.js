@@ -54,6 +54,7 @@ export default function Teacher() {
 
   return (
     <div style={{ padding: 20 }}>
+      {/* Navigation Menu */}
       <nav style={navStyle}>
         <Link href="/"><button style={buttonStyle}>الرئيسية</button></Link>
         <Link href="/inventory"><button style={buttonStyle}>المخزون</button></Link>
@@ -62,4 +63,56 @@ export default function Teacher() {
         <Link href="/teacher"><button style={buttonStyle}>المدرس</button></Link>
       </nav>
 
-      <h1>تسجيل طلب طباعة لل
+      {/* Main Content */}
+      <h1>تسجيل طلب طباعة للمدرس</h1>
+      <input
+        type="text"
+        placeholder="اسم المدرس"
+        value={teacher.name}
+        onChange={(e) => setTeacher({ ...teacher, name: e.target.value })}
+      />
+      <input
+        type="text"
+        placeholder="اسم المادة"
+        value={teacher.subject}
+        onChange={(e) => setTeacher({ ...teacher, subject: e.target.value })}
+      />
+      <input
+        type="number"
+        placeholder="عدد النسخ"
+        value={teacher.copies}
+        onChange={(e) => setTeacher({ ...teacher, copies: e.target.value })}
+      />
+      <input
+        type="number"
+        placeholder="عدد أوراق النسخة"
+        value={teacher.pagesPerCopy}
+        onChange={(e) => setTeacher({ ...teacher, pagesPerCopy: e.target.value })}
+      />
+      <input
+        type="number"
+        placeholder="سعر الصفحة (جنيه)"
+        value={teacher.pricePerPage}
+        onChange={(e) => setTeacher({ ...teacher, pricePerPage: e.target.value })}
+      />
+
+      <button onClick={calculatePrice} style={{ ...buttonStyle, marginTop: "10px" }}>
+        احسب السعر
+      </button>
+      <h3>الإجمالي: {totalPrice} جنيه</h3>
+
+      <label style={{ display: "block", marginTop: "10px" }}>
+        <input
+          type="checkbox"
+          checked={teacher.paid}
+          onChange={(e) => setTeacher({ ...teacher, paid: e.target.checked })}
+        />
+        تم الدفع
+      </label>
+
+      <button onClick={sendWhatsApp} style={{ ...buttonStyle, marginTop: "10px" }}>
+        إرسال الطلب عبر واتساب
+      </button>
+    </div>
+  );
+}
