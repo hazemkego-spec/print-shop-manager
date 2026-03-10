@@ -4,6 +4,7 @@ export default function Teacher() {
   const [teacher, setTeacher] = useState({
     name: "",
     subject: "",
+    grade: "", // الصف الدراسي
     copies: "",
     pagesPerCopy: "",
     pricePerPage: "",
@@ -11,7 +12,9 @@ export default function Teacher() {
   });
 
   const [totalPrice, setTotalPrice] = useState(0);
+  const [invoiceNumber, setInvoiceNumber] = useState(1); // رقم الفاتورة يبدأ من 1
 
+  // حساب السعر بالجنيهات والقروش
   const calculatePrice = () => {
     const copies = parseInt(teacher.copies) || 0;
     const pages = parseInt(teacher.pagesPerCopy) || 0;
@@ -20,18 +23,33 @@ export default function Teacher() {
     setTotalPrice(total);
   };
 
+  // إرسال الطلب لرقم واتساب ثابت مع رسالة ترحيب + رقم فاتورة + وقت
   const sendWhatsApp = () => {
-    const message = `طلب طباعة جديد:
+    const pounds = Math.floor(totalPrice); // الجنيهات
+    const piastres = Math.round((totalPrice - pounds) * 100); // القروش
+    const now = new Date();
+    const dateTime = now.toLocaleString("ar-EG"); // التاريخ والوقت بالعربية
+
+    const message = `أهلاً بك في مطبعة الرحاب 🌸
+فاتورة رقم: ${invoiceNumber}
+تاريخ الطلب: ${dateTime}
+
+طلب طباعة جديد:
 المدرس: ${teacher.name}
 المادة: ${teacher.subject}
+الصف الدراسي: ${teacher.grade}
 عدد النسخ: ${teacher.copies}
 عدد أوراق النسخة: ${teacher.pagesPerCopy}
 سعر الصفحة: ${teacher.pricePerPage} جنيه
-الإجمالي: ${totalPrice} جنيه
+الإجمالي: ${pounds} جنيه و ${piastres} قرش
 حالة الدفع: ${teacher.paid ? "مدفوع" : "غير مدفوع"}`;
 
-    const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    const phone = "01122947479"; // رقم ثابت
+    const url = `https://wa.me/2${phone}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
+
+    // زيادة رقم الفاتورة بعد كل إرسال
+    setInvoiceNumber(invoiceNumber + 1);
   };
 
   const buttonStyle = {
@@ -80,6 +98,12 @@ export default function Teacher() {
         onChange={(e) => setTeacher({ ...teacher, subject: e.target.value })}
       />
       <input
+        type="text"
+        placeholder="الصف الدراسي"
+        value={teacher.grade}
+        onChange={(e) => setTeacher({ ...teacher, grade: e.target.value })}
+      />
+      <input
         type="number"
         placeholder="عدد النسخ"
         value={teacher.copies}
@@ -101,7 +125,12 @@ export default function Teacher() {
       <button onClick={calculatePrice} style={buttonStyle}>
         احسب السعر
       </button>
-      <h3>الإجمالي: {totalPrice} جنيه</h3>
+
+      {/* عرض السعر بالجنيهات والقروش */}
+      <h3>
+        الإجمالي: {Math.floor(totalPrice)} جنيه و{" "}
+        {Math.round((totalPrice - Math.floor(totalPrice)) * 100)} قرش
+      </h3>
 
       <label style={{ marginTop: "10px" }}>
         <input
