@@ -68,15 +68,15 @@ export default function Home() {
             padding: "20px",
             borderRadius: "10px",
             maxWidth: "400px",
-            textAlign: "center"
+            textAlign: "right",
+            direction: "rtl"
           }}>
             <h2>📱 كيفية تحميل التطبيق</h2>
-            <p>1️⃣ افتح الرابط من متصفح Google Chrome أو Safari.</p>
-            <p>2️⃣ اضغط على القائمة (⋮ أو ⌵).</p>
-            <p>3️⃣ اختر "إضافة إلى الشاشة الرئيسية".</p>
-            <p>4️⃣ هيظهر أيقونة مطبعة الرحاب على جهازك.</p>
-            <img src="/install-step1.png" alt="خطوة 1" style={{width:"100%", margin:"10px 0"}} />
-            <img src="/install-step2.png" alt="خطوة 2" style={{width:"100%", margin:"10px 0"}} />
+            <p>✅ افتح الرابط من متصفح <strong>Google Chrome</strong> أو <strong>Safari</strong>.</p>
+            <p>☰ اضغط على زر القائمة (ثلاث نقاط ⋮ في أعلى يمين الشاشة).</p>
+            <p>📲 اختر "إضافة إلى الشاشة الرئيسية".</p>
+            <p>📌 هيظهر التطبيق على جهازك كأيقونة مستقلة باسم "مطبعة الرحاب".</p>
+            <p>🎉 كده تقدر تفتحه زي أي تطبيق عادي من الشاشة الرئيسية.</p>
             <button
               onClick={() => setShowPopup(false)}
               style={{ marginTop: "10px", padding: "8px 12px", backgroundColor: "#0070f3", color: "white", border: "none", borderRadius: "5px" }}
