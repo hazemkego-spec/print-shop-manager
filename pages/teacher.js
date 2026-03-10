@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useState } from "react";
 
 export default function Teacher() {
@@ -43,28 +42,31 @@ export default function Teacher() {
     borderRadius: "5px",
     cursor: "pointer",
     fontSize: "14px",
+    marginTop: "10px",
   };
 
-  const navStyle = {
-    marginBottom: "20px",
+  const logoStyle = {
+    width: "120px",
+    height: "120px",
+    marginBottom: "15px",
+  };
+
+  const containerStyle = {
     display: "flex",
-    gap: "10px",
-    flexWrap: "wrap",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "20px",
+    textAlign: "center",
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      {/* Navigation Menu */}
-      <nav style={navStyle}>
-        <Link href="/"><button style={buttonStyle}>الرئيسية</button></Link>
-        <Link href="/inventory"><button style={buttonStyle}>المخزون</button></Link>
-        <Link href="/customers"><button style={buttonStyle}>العملاء</button></Link>
-        <Link href="/invoices"><button style={buttonStyle}>الفواتير</button></Link>
-        <Link href="/teacher"><button style={buttonStyle}>المدرس</button></Link>
-      </nav>
+    <div style={containerStyle}>
+      {/* شعار المطبعة */}
+      <img src="/logo.png" alt="لوجو مطبعة الرحاب" style={logoStyle} />
+      <h1>مطبعة الرحاب</h1>
+      <p>تسجيل طلب طباعة للمدرس</p>
 
-      {/* Main Content */}
-      <h1>تسجيل طلب طباعة للمدرس</h1>
+      {/* فورم إدخال بيانات المدرس */}
       <input
         type="text"
         placeholder="اسم المدرس"
@@ -96,12 +98,12 @@ export default function Teacher() {
         onChange={(e) => setTeacher({ ...teacher, pricePerPage: e.target.value })}
       />
 
-      <button onClick={calculatePrice} style={{ ...buttonStyle, marginTop: "10px" }}>
+      <button onClick={calculatePrice} style={buttonStyle}>
         احسب السعر
       </button>
       <h3>الإجمالي: {totalPrice} جنيه</h3>
 
-      <label style={{ display: "block", marginTop: "10px" }}>
+      <label style={{ marginTop: "10px" }}>
         <input
           type="checkbox"
           checked={teacher.paid}
@@ -110,7 +112,7 @@ export default function Teacher() {
         تم الدفع
       </label>
 
-      <button onClick={sendWhatsApp} style={{ ...buttonStyle, marginTop: "10px" }}>
+      <button onClick={sendWhatsApp} style={buttonStyle}>
         إرسال الطلب عبر واتساب
       </button>
     </div>
