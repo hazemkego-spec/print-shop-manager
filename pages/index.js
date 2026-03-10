@@ -1,71 +1,46 @@
 import Link from "next/link";
-import { useState } from "react";
 
 export default function Home() {
-  const [orders, setOrders] = useState([]);
-  const [newOrder, setNewOrder] = useState("");
-
-  const addOrder = () => {
-    if (newOrder.trim() === "") return;
-    setOrders([...orders, newOrder]);
-    setNewOrder("");
-  };
-
-  // تنسيق الأزرار
   const buttonStyle = {
-    padding: "10px 15px",
-    backgroundColor: "#0070f3",
+    padding: "15px 25px",
+    backgroundColor: "#28a745",
     color: "white",
     border: "none",
-    borderRadius: "5px",
+    borderRadius: "8px",
     cursor: "pointer",
-    fontSize: "14px",
+    fontSize: "18px",
+    fontWeight: "bold",
   };
 
-  const navStyle = {
-    marginBottom: "20px",
+  const containerStyle = {
     display: "flex",
-    gap: "10px",
-    flexWrap: "wrap",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100vh",
+    textAlign: "center",
+  };
+
+  const logoStyle = {
+    width: "100px",
+    height: "100px",
+    marginBottom: "20px",
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      {/* Navigation Menu */}
-      <nav style={navStyle}>
-        <Link href="/">
-          <button style={buttonStyle}>الرئيسية</button>
-        </Link>
-        <Link href="/inventory">
-          <button style={buttonStyle}>المخزون</button>
-        </Link>
-        <Link href="/customers">
-          <button style={buttonStyle}>العملاء</button>
-        </Link>
-        <Link href="/invoices">
-          <button style={buttonStyle}>الفواتير</button>
-        </Link>
-        <Link href="/teacher">
-          <button style={buttonStyle}>المدرس</button>
-        </Link>
-      </nav>
-
-      {/* Main Content */}
-      <h1>إدارة المطبعة</h1>
-      <input
-        type="text"
-        value={newOrder}
-        onChange={(e) => setNewOrder(e.target.value)}
-        placeholder="أدخل الطلب"
+    <div style={containerStyle}>
+      {/* شعار أو أيقونة */}
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/29/29302.png"
+        alt="شعار الطابعة"
+        style={logoStyle}
       />
-      <button onClick={addOrder} style={{ ...buttonStyle, marginLeft: "10px" }}>
-        إضافة
-      </button>
-      <ul>
-        {orders.map((order, i) => (
-          <li key={i}>{order}</li>
-        ))}
-      </ul>
+
+      <h1>مرحبًا بك في نظام إدارة المطبعة</h1>
+      <p>اضغط على الزر بالأسفل لتسجيل طلبك كمدرس</p>
+      <Link href="/teacher">
+        <button style={buttonStyle}>ابدأ تسجيل طلبك</button>
+      </Link>
     </div>
   );
 }
