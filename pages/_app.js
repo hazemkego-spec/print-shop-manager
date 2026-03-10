@@ -1,5 +1,4 @@
 import Head from "next/head";
-import "../styles/globals.css"; // لو عندك ملف ستايل عام
 
 function MyApp({ Component, pageProps }) {
   return (
