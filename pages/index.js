@@ -31,10 +31,10 @@ export default function Home() {
     <div style={containerStyle}>
       {/* شعار المطبعة */}
       <img
-        src="https://copilot.microsoft.com/th/id/BCO.6ba48088-92e9-4ae9-b100-517488d62e09.png"
-        alt="لوجو مطبعة الرحاب"
-        style={logoStyle}
-      />
+  src="/logo.png"
+  alt="لوجو مطبعة الرحاب"
+  style={logoStyle}
+/>
 
       {/* اسم المطبعة */}
       <h1>مطبعة الرحاب</h1>
