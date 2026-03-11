@@ -4,6 +4,7 @@ export default function Home() {
   const [teacher, setTeacher] = useState("");
   const [subject, setSubject] = useState("");
   const [grade, setGrade] = useState(""); // الصف الدراسي
+  const [cover, setCover] = useState("بدون غلاف"); // غلاف / بدون غلاف
   const [copies, setCopies] = useState("");
   const [pagesPerCopy, setPagesPerCopy] = useState("");
   const [pricePiastres, setPricePiastres] = useState(""); // السعر بالقروش فقط
@@ -25,6 +26,7 @@ export default function Home() {
 👨‍🏫 المدرس: ${teacher}
 📘 المادة: ${subject}
 🏫 الصف الدراسي: ${grade}
+📦 الغلاف: ${cover}
 📄 عدد النسخ: ${copies}
 📑 عدد صفحات النسخة: ${pagesPerCopy}
 💵 سعر الورقة: ${pricePiastres} قرش
@@ -40,20 +42,10 @@ export default function Home() {
   };
 
   return (
-    <div
-      style={{
-        padding: "20px",
-        textAlign: "center",
-        backgroundImage: "url('/logo.png')",
-        backgroundSize: "contain",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        minHeight: "100vh",
-      }}
-    >
-      <h1 style={{ backgroundColor: "rgba(255,255,255,0.8)", display: "inline-block", padding: "10px 20px", borderRadius: "10px" }}>
-        مطبعة الرحاب
-      </h1>
+    <div style={{ padding: "20px", textAlign: "center" }}>
+      {/* اللوجو */}
+      <img src="/logo.png" alt="شعار مطبعة الرحاب" style={{ width: "200px", marginBottom: "10px" }} />
+      <h1>مطبعة الرحاب</h1>
 
       <h2>بدء الطلبات</h2>
 
@@ -78,6 +70,16 @@ export default function Home() {
         onChange={(e) => setGrade(e.target.value)}
         style={{ display: "block", margin: "10px auto", padding: "8px" }}
       />
+
+      <select
+        value={cover}
+        onChange={(e) => setCover(e.target.value)}
+        style={{ display: "block", margin: "10px auto", padding: "8px" }}
+      >
+        <option>غلاف</option>
+        <option>بدون غلاف</option>
+      </select>
+
       <input
         type="number"
         placeholder="عدد النسخ"
