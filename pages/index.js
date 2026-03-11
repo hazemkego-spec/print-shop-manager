@@ -6,7 +6,7 @@ export default function Home() {
   const [grade, setGrade] = useState(""); // الصف الدراسي
   const [cover, setCover] = useState("بدون غلاف"); // غلاف / بدون غلاف
   const [copies, setCopies] = useState("");
-  const [pagesPerCopy, setPagesPerCopy] = useState("");
+  const [pagesPerCopy, setPagesPerCopy] = useState(""); // عدد ورق النسخة الواحدة
   const [pricePiastres, setPricePiastres] = useState(""); // السعر بالقروش فقط
   const [paidStatus, setPaidStatus] = useState("لم يتم الدفع");
   const [paidAmount, setPaidAmount] = useState("");
@@ -28,7 +28,7 @@ export default function Home() {
 🏫 الصف الدراسي: ${grade}
 📦 الغلاف: ${cover}
 📄 عدد النسخ: ${copies}
-📑 عدد صفحات النسخة: ${pagesPerCopy}
+📑 عدد ورق النسخة الواحدة: ${pagesPerCopy}
 💵 سعر الورقة: ${pricePiastres} قرش
 💰 الإجمالي: ${total} جنيه
 📌 حالة الدفع: ${paidStatus}
@@ -44,7 +44,7 @@ export default function Home() {
   return (
     <div style={{ padding: "20px", textAlign: "center" }}>
       {/* اللوجو */}
-      <img src="/logo.png" alt="شعار مطبعة الرحاب" style={{ width: "200px", marginBottom: "10px" }} />
+      <img src="/logo.png" alt="شعار مطبعة الرحاب" style={{ width: "220px", marginBottom: "10px" }} />
       <h1>مطبعة الرحاب</h1>
 
       <h2>بدء الطلبات</h2>
@@ -89,7 +89,7 @@ export default function Home() {
       />
       <input
         type="number"
-        placeholder="عدد صفحات النسخة الواحدة"
+        placeholder="عدد ورق النسخة الواحدة"
         value={pagesPerCopy}
         onChange={(e) => setPagesPerCopy(e.target.value)}
         style={{ display: "block", margin: "10px auto", padding: "8px" }}
