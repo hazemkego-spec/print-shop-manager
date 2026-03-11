@@ -3,19 +3,19 @@ import { useState } from "react";
 export default function Home() {
   const [teacher, setTeacher] = useState("");
   const [subject, setSubject] = useState("");
+  const [grade, setGrade] = useState(""); // الصف الدراسي
   const [copies, setCopies] = useState("");
   const [pagesPerCopy, setPagesPerCopy] = useState("");
-  const [pricePounds, setPricePounds] = useState("");
-  const [pricePiastres, setPricePiastres] = useState("");
+  const [pricePiastres, setPricePiastres] = useState(""); // السعر بالقروش فقط
   const [paidStatus, setPaidStatus] = useState("لم يتم الدفع");
   const [paidAmount, setPaidAmount] = useState("");
-  const [invoiceNumber, setInvoiceNumber] = useState(1); // يبدأ من 1
+  const [invoiceNumber, setInvoiceNumber] = useState(1);
 
   const calculateTotal = () => {
     const totalPages = Number(copies) * Number(pagesPerCopy);
-    const pricePerPage = Number(pricePounds) + Number(pricePiastres) / 100;
+    const pricePerPage = Number(pricePiastres) / 100; // تحويل القروش إلى جنيه
     const total = totalPages * pricePerPage;
-    return total.toFixed(2); // جنيه + قروش
+    return total.toFixed(2);
   };
 
   const sendWhatsApp = () => {
@@ -24,9 +24,10 @@ export default function Home() {
 🧾 فاتورة رقم: ${invoiceNumber}
 👨‍🏫 المدرس: ${teacher}
 📘 المادة: ${subject}
+🏫 الصف الدراسي: ${grade}
 📄 عدد النسخ: ${copies}
 📑 عدد صفحات النسخة: ${pagesPerCopy}
-💵 سعر الورقة: ${pricePounds} جنيه و ${pricePiastres} قرش
+💵 سعر الورقة: ${pricePiastres} قرش
 💰 الإجمالي: ${total} جنيه
 📌 حالة الدفع: ${paidStatus}
 💳 المبلغ المدفوع: ${paidAmount} جنيه
@@ -35,17 +36,25 @@ export default function Home() {
     const url = `https://wa.me/201122947479?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
 
-    // بعد إرسال الطلب نزود رقم الفاتورة
     setInvoiceNumber(invoiceNumber + 1);
   };
 
   return (
-    <div style={{ padding: "20px", textAlign: "center" }}>
-      {/* اللوجو */}
-      <img src="/logo.png" alt="شعار مطبعة الرحاب" style={{ width: "150px", marginBottom: "10px" }} />
-      <h1>مطبعة الرحاب</h1>
+    <div
+      style={{
+        padding: "20px",
+        textAlign: "center",
+        backgroundImage: "url('/logo.png')",
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+      }}
+    >
+      <h1 style={{ backgroundColor: "rgba(255,255,255,0.8)", display: "inline-block", padding: "10px 20px", borderRadius: "10px" }}>
+        مطبعة الرحاب
+      </h1>
 
-      {/* زرار بدء الطلبات */}
       <h2>بدء الطلبات</h2>
 
       <input
@@ -63,6 +72,13 @@ export default function Home() {
         style={{ display: "block", margin: "10px auto", padding: "8px" }}
       />
       <input
+        type="text"
+        placeholder="الصف الدراسي"
+        value={grade}
+        onChange={(e) => setGrade(e.target.value)}
+        style={{ display: "block", margin: "10px auto", padding: "8px" }}
+      />
+      <input
         type="number"
         placeholder="عدد النسخ"
         value={copies}
@@ -76,22 +92,13 @@ export default function Home() {
         onChange={(e) => setPagesPerCopy(e.target.value)}
         style={{ display: "block", margin: "10px auto", padding: "8px" }}
       />
-      <div style={{ margin: "10px auto" }}>
-        <input
-          type="number"
-          placeholder="سعر الورقة بالجنيه"
-          value={pricePounds}
-          onChange={(e) => setPricePounds(e.target.value)}
-          style={{ width: "45%", padding: "8px", marginRight: "5px" }}
-        />
-        <input
-          type="number"
-          placeholder="سعر الورقة بالقروش"
-          value={pricePiastres}
-          onChange={(e) => setPricePiastres(e.target.value)}
-          style={{ width: "45%", padding: "8px" }}
-        />
-      </div>
+      <input
+        type="number"
+        placeholder="سعر الورقة بالقروش (مثال: 80)"
+        value={pricePiastres}
+        onChange={(e) => setPricePiastres(e.target.value)}
+        style={{ display: "block", margin: "10px auto", padding: "8px" }}
+      />
 
       <select
         value={paidStatus}
