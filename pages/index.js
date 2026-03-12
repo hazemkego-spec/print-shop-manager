@@ -19,8 +19,18 @@ export default function Home() {
     return total.toFixed(2);
   };
 
+  const calculateRemaining = () => {
+    const total = parseFloat(calculateTotal());
+    if (paidStatus === "تم دفع جزء" && paidAmount) {
+      return (total - Number(paidAmount)).toFixed(2);
+    }
+    if (paidStatus === "تم الدفع بالكامل") return "0.00";
+    return total.toFixed(2);
+  };
+
   const sendWhatsApp = () => {
     const total = calculateTotal();
+    const remaining = calculateRemaining();
     const message = `
 🧾 فاتورة رقم: ${invoiceNumber}
 👨‍🏫 المدرس: ${teacher}
@@ -33,6 +43,7 @@ export default function Home() {
 💰 الإجمالي: ${total} جنيه
 📌 حالة الدفع: ${paidStatus}
 💳 المبلغ المدفوع: ${paidAmount} جنيه
+💳 المبلغ المتبقي: ${remaining} جنيه
     `;
 
     const url = `https://wa.me/201122947479?text=${encodeURIComponent(message)}`;
@@ -123,6 +134,7 @@ export default function Home() {
       )}
 
       <h3>💰 الإجمالي: {calculateTotal()} جنيه</h3>
+      <h3>💳 المتبقي: {calculateRemaining()} جنيه</h3>
 
       <button
         onClick={sendWhatsApp}
