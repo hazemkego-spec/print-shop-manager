@@ -54,7 +54,7 @@ export default function Home() {
 
   const labelStyle = {
     display: "inline-block",
-    width: "150px",
+    width: "160px",
     textAlign: "right",
     fontWeight: "bold",
     color: "#0070f3",
@@ -70,71 +70,71 @@ export default function Home() {
   return (
     <div style={{ padding: "20px", textAlign: "center" }}>
       {/* اللوجو */}
-      <img src="/logo.png" alt="شعار مطبعة الرحاب" style={{ width: "220px", marginBottom: "10px" }} />
-      <h1>مطبعة الرحاب</h1>
+      <img src="/logo.png" alt="شعار مطبعة الرحاب" style={{ width: "280px", marginBottom: "20px" }} />
 
-      <h2>بدء الطلبات</h2>
-
-      <div>
-        <label style={labelStyle}>اسم المدرس:</label>
-        <input type="text" value={teacher} onChange={(e) => setTeacher(e.target.value)} style={inputStyle} />
-      </div>
-
-      <div>
-        <label style={labelStyle}>اسم المادة:</label>
-        <input type="text" value={subject} onChange={(e) => setSubject(e.target.value)} style={inputStyle} />
-      </div>
-
-      <div>
-        <label style={labelStyle}>الصف الدراسي:</label>
-        <input type="text" value={grade} onChange={(e) => setGrade(e.target.value)} style={inputStyle} />
-      </div>
-
-      <div>
-        <label style={labelStyle}>الغلاف:</label>
-        <select value={cover} onChange={(e) => setCover(e.target.value)} style={inputStyle}>
-          <option>غلاف</option>
-          <option>بدون غلاف</option>
-        </select>
-      </div>
-
-      <div>
-        <label style={labelStyle}>عدد النسخ:</label>
-        <input type="number" value={copies} onChange={(e) => setCopies(e.target.value)} style={inputStyle} />
-      </div>
-
-      <div>
-        <label style={labelStyle}>عدد ورق النسخة:</label>
-        <input type="number" value={pagesPerCopy} onChange={(e) => setPagesPerCopy(e.target.value)} style={inputStyle} />
-      </div>
-
-      <div>
-        <label style={labelStyle}>سعر الورقة (بالقرش):</label>
-        <input type="number" value={pricePiastres} onChange={(e) => setPricePiastres(e.target.value)} style={inputStyle} />
-      </div>
-
-      <div>
-        <label style={labelStyle}>حالة الدفع:</label>
-        <select value={paidStatus} onChange={(e) => setPaidStatus(e.target.value)} style={inputStyle}>
-          <option>لم يتم الدفع</option>
-          <option>تم الدفع بالكامل</option>
-          <option>تم دفع جزء</option>
-        </select>
-      </div>
-
-      {paidStatus === "تم دفع جزء" && (
+      {/* إدخال البيانات */}
+      <div style={{ display: "inline-block", textAlign: "left", marginTop: "10px" }}>
         <div>
-          <label style={labelStyle}>المبلغ المدفوع:</label>
-          <input type="number" value={paidAmount} onChange={(e) => setPaidAmount(e.target.value)} style={inputStyle} />
+          <label style={labelStyle}>اسم المدرس:</label>
+          <input type="text" value={teacher} onChange={(e) => setTeacher(e.target.value)} style={inputStyle} />
         </div>
-      )}
 
-      <h3>💰 الإجمالي: {calculateTotal()} جنيه</h3>
-      <h3>💳 المتبقي: {calculateRemaining()} جنيه</h3>
+        <div>
+          <label style={labelStyle}>اسم المادة:</label>
+          <input type="text" value={subject} onChange={(e) => setSubject(e.target.value)} style={inputStyle} />
+        </div>
+
+        <div>
+          <label style={labelStyle}>الصف الدراسي:</label>
+          <input type="text" value={grade} onChange={(e) => setGrade(e.target.value)} style={inputStyle} />
+        </div>
+
+        <div>
+          <label style={labelStyle}>الغلاف:</label>
+          <select value={cover} onChange={(e) => setCover(e.target.value)} style={inputStyle}>
+            <option>غلاف</option>
+            <option>بدون غلاف</option>
+          </select>
+        </div>
+
+        <div>
+          <label style={labelStyle}>عدد النسخ:</label>
+          <input type="number" value={copies} onChange={(e) => setCopies(e.target.value)} style={inputStyle} />
+        </div>
+
+        <div>
+          <label style={labelStyle}>عدد ورق النسخة:</label>
+          <input type="number" value={pagesPerCopy} onChange={(e) => setPagesPerCopy(e.target.value)} style={inputStyle} />
+        </div>
+
+        <div>
+          <label style={labelStyle}>سعر الورقة (بالقرش):</label>
+          <input type="number" value={pricePiastres} onChange={(e) => setPricePiastres(e.target.value)} style={inputStyle} />
+        </div>
+
+        <div>
+          <label style={labelStyle}>حالة الدفع:</label>
+          <select value={paidStatus} onChange={(e) => setPaidStatus(e.target.value)} style={inputStyle}>
+            <option>لم يتم الدفع</option>
+            <option>تم الدفع بالكامل</option>
+            <option>تم دفع جزء</option>
+          </select>
+        </div>
+
+        {paidStatus === "تم دفع جزء" && (
+          <div>
+            <label style={labelStyle}>المبلغ المدفوع:</label>
+            <input type="number" value={paidAmount} onChange={(e) => setPaidAmount(e.target.value)} style={inputStyle} />
+          </div>
+        )}
+      </div>
+
+      <h3 style={{ marginTop: "20px" }}>💰 الإجمالي: {calculateTotal()} جنيه</h3>
+      <h3 style={{ marginTop: "5px" }}>💳 المتبقي: {calculateRemaining()} جنيه</h3>
 
       <button
         onClick={sendWhatsApp}
-        style={{ marginTop: "15px", padding: "10px 20px", backgroundColor: "#28a745", color: "white", border: "none", borderRadius: "5px" }}
+        style={{ marginTop: "20px", padding: "10px 20px", backgroundColor: "#28a745", color: "white", border: "none", borderRadius: "5px" }}
       >
         إرسال الطلب عبر واتساب
       </button>
