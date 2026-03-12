@@ -12,7 +12,7 @@ export default function Home() {
   const [paidAmount, setPaidAmount] = useState("");
   const [invoiceNumber, setInvoiceNumber] = useState(1);
 
-  // تحميل البيانات من LocalStorage عند فتح التطبيق
+  // تحميل البيانات من LocalStorage
   useEffect(() => {
     const savedTeacher = localStorage.getItem("teacherName");
     const savedSubject = localStorage.getItem("subjectName");
@@ -23,7 +23,7 @@ export default function Home() {
     if (savedInvoice) setInvoiceNumber(Number(savedInvoice));
   }, []);
 
-  // حفظ البيانات في LocalStorage عند التغيير
+  // حفظ البيانات في LocalStorage
   useEffect(() => {
     localStorage.setItem("teacherName", teacher);
   }, [teacher]);
@@ -73,7 +73,7 @@ export default function Home() {
     const url = `https://wa.me/201122947479?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
 
-    setInvoiceNumber(invoiceNumber + 1); // يزيد رقم الفاتورة
+    setInvoiceNumber(invoiceNumber + 1);
   };
 
   const labelStyle = {
@@ -94,13 +94,13 @@ export default function Home() {
   return (
     <div style={{ padding: "20px", textAlign: "center" }}>
       {/* اللوجو */}
-      <img src="/logo.png" alt="شعار مطبعة الرحاب" style={{ width: "300px", marginBottom: "20px" }} />
+      <img src="/logo.png" alt="شعار مطبعة الرحاب" style={{ width: "320px", marginBottom: "10px" }} />
 
       {/* إدخال البيانات */}
       <div style={{
         display: "inline-block",
         textAlign: "left",
-        marginTop: "10px",
+        marginTop: "0px", // رفع البلوك لفوق تحت اللوجو مباشرة
         padding: "20px",
         border: "1px solid #ccc",
         borderRadius: "10px",
