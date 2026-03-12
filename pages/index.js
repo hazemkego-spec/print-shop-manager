@@ -14,7 +14,7 @@ export default function Home() {
 
   const calculateTotal = () => {
     const totalPages = Number(copies) * Number(pagesPerCopy);
-    const pricePerPage = Number(pricePiastres) / 100; // تحويل القروش إلى جنيه
+    const pricePerPage = Number(pricePiastres) / 100;
     const total = totalPages * pricePerPage;
     return total.toFixed(2);
   };
@@ -52,6 +52,21 @@ export default function Home() {
     setInvoiceNumber(invoiceNumber + 1);
   };
 
+  const labelStyle = {
+    display: "inline-block",
+    width: "150px",
+    textAlign: "right",
+    fontWeight: "bold",
+    color: "#0070f3",
+    marginRight: "10px"
+  };
+
+  const inputStyle = {
+    padding: "8px",
+    margin: "5px",
+    width: "200px"
+  };
+
   return (
     <div style={{ padding: "20px", textAlign: "center" }}>
       {/* اللوجو */}
@@ -60,77 +75,58 @@ export default function Home() {
 
       <h2>بدء الطلبات</h2>
 
-      <input
-        type="text"
-        placeholder="اسم المدرس"
-        value={teacher}
-        onChange={(e) => setTeacher(e.target.value)}
-        style={{ display: "block", margin: "10px auto", padding: "8px" }}
-      />
-      <input
-        type="text"
-        placeholder="اسم المادة"
-        value={subject}
-        onChange={(e) => setSubject(e.target.value)}
-        style={{ display: "block", margin: "10px auto", padding: "8px" }}
-      />
-      <input
-        type="text"
-        placeholder="الصف الدراسي"
-        value={grade}
-        onChange={(e) => setGrade(e.target.value)}
-        style={{ display: "block", margin: "10px auto", padding: "8px" }}
-      />
+      <div>
+        <label style={labelStyle}>اسم المدرس:</label>
+        <input type="text" value={teacher} onChange={(e) => setTeacher(e.target.value)} style={inputStyle} />
+      </div>
 
-      <select
-        value={cover}
-        onChange={(e) => setCover(e.target.value)}
-        style={{ display: "block", margin: "10px auto", padding: "8px" }}
-      >
-        <option>غلاف</option>
-        <option>بدون غلاف</option>
-      </select>
+      <div>
+        <label style={labelStyle}>اسم المادة:</label>
+        <input type="text" value={subject} onChange={(e) => setSubject(e.target.value)} style={inputStyle} />
+      </div>
 
-      <input
-        type="number"
-        placeholder="عدد النسخ"
-        value={copies}
-        onChange={(e) => setCopies(e.target.value)}
-        style={{ display: "block", margin: "10px auto", padding: "8px" }}
-      />
-      <input
-        type="number"
-        placeholder="عدد ورق النسخة الواحدة"
-        value={pagesPerCopy}
-        onChange={(e) => setPagesPerCopy(e.target.value)}
-        style={{ display: "block", margin: "10px auto", padding: "8px" }}
-      />
-      <input
-        type="number"
-        placeholder="سعر الورقة بالقروش (مثال: 80)"
-        value={pricePiastres}
-        onChange={(e) => setPricePiastres(e.target.value)}
-        style={{ display: "block", margin: "10px auto", padding: "8px" }}
-      />
+      <div>
+        <label style={labelStyle}>الصف الدراسي:</label>
+        <input type="text" value={grade} onChange={(e) => setGrade(e.target.value)} style={inputStyle} />
+      </div>
 
-      <select
-        value={paidStatus}
-        onChange={(e) => setPaidStatus(e.target.value)}
-        style={{ display: "block", margin: "10px auto", padding: "8px" }}
-      >
-        <option>لم يتم الدفع</option>
-        <option>تم الدفع بالكامل</option>
-        <option>تم دفع جزء</option>
-      </select>
+      <div>
+        <label style={labelStyle}>الغلاف:</label>
+        <select value={cover} onChange={(e) => setCover(e.target.value)} style={inputStyle}>
+          <option>غلاف</option>
+          <option>بدون غلاف</option>
+        </select>
+      </div>
+
+      <div>
+        <label style={labelStyle}>عدد النسخ:</label>
+        <input type="number" value={copies} onChange={(e) => setCopies(e.target.value)} style={inputStyle} />
+      </div>
+
+      <div>
+        <label style={labelStyle}>عدد ورق النسخة:</label>
+        <input type="number" value={pagesPerCopy} onChange={(e) => setPagesPerCopy(e.target.value)} style={inputStyle} />
+      </div>
+
+      <div>
+        <label style={labelStyle}>سعر الورقة (بالقرش):</label>
+        <input type="number" value={pricePiastres} onChange={(e) => setPricePiastres(e.target.value)} style={inputStyle} />
+      </div>
+
+      <div>
+        <label style={labelStyle}>حالة الدفع:</label>
+        <select value={paidStatus} onChange={(e) => setPaidStatus(e.target.value)} style={inputStyle}>
+          <option>لم يتم الدفع</option>
+          <option>تم الدفع بالكامل</option>
+          <option>تم دفع جزء</option>
+        </select>
+      </div>
 
       {paidStatus === "تم دفع جزء" && (
-        <input
-          type="number"
-          placeholder="المبلغ المدفوع"
-          value={paidAmount}
-          onChange={(e) => setPaidAmount(e.target.value)}
-          style={{ display: "block", margin: "10px auto", padding: "8px" }}
-        />
+        <div>
+          <label style={labelStyle}>المبلغ المدفوع:</label>
+          <input type="number" value={paidAmount} onChange={(e) => setPaidAmount(e.target.value)} style={inputStyle} />
+        </div>
       )}
 
       <h3>💰 الإجمالي: {calculateTotal()} جنيه</h3>
