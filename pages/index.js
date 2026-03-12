@@ -3,11 +3,11 @@ import { useState } from "react";
 export default function Home() {
   const [teacher, setTeacher] = useState("");
   const [subject, setSubject] = useState("");
-  const [grade, setGrade] = useState(""); // الصف الدراسي
-  const [cover, setCover] = useState("بدون غلاف"); // غلاف / بدون غلاف
+  const [grade, setGrade] = useState("");
+  const [cover, setCover] = useState("بدون غلاف");
   const [copies, setCopies] = useState("");
-  const [pagesPerCopy, setPagesPerCopy] = useState(""); // عدد ورق النسخة الواحدة
-  const [pricePiastres, setPricePiastres] = useState(""); // السعر بالقروش فقط
+  const [pagesPerCopy, setPagesPerCopy] = useState("");
+  const [pricePiastres, setPricePiastres] = useState("");
   const [paidStatus, setPaidStatus] = useState("لم يتم الدفع");
   const [paidAmount, setPaidAmount] = useState("");
   const [invoiceNumber, setInvoiceNumber] = useState(1);
@@ -70,10 +70,19 @@ export default function Home() {
   return (
     <div style={{ padding: "20px", textAlign: "center" }}>
       {/* اللوجو */}
-      <img src="/logo.png" alt="شعار مطبعة الرحاب" style={{ width: "280px", marginBottom: "20px" }} />
+      <img src="/logo.png" alt="شعار مطبعة الرحاب" style={{ width: "300px", marginBottom: "20px" }} />
 
-      {/* إدخال البيانات */}
-      <div style={{ display: "inline-block", textAlign: "left", marginTop: "10px" }}>
+      {/* إدخال البيانات داخل بلوك منسق */}
+      <div style={{
+        display: "inline-block",
+        textAlign: "left",
+        marginTop: "10px",
+        padding: "20px",
+        border: "1px solid #ccc",
+        borderRadius: "10px",
+        boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+        backgroundColor: "#f9f9f9"
+      }}>
         <div>
           <label style={labelStyle}>اسم المدرس:</label>
           <input type="text" value={teacher} onChange={(e) => setTeacher(e.target.value)} style={inputStyle} />
