@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [teacher, setTeacher] = useState("");
@@ -11,6 +11,30 @@ export default function Home() {
   const [paidStatus, setPaidStatus] = useState("لم يتم الدفع");
   const [paidAmount, setPaidAmount] = useState("");
   const [invoiceNumber, setInvoiceNumber] = useState(1);
+
+  // تحميل البيانات من LocalStorage عند فتح التطبيق
+  useEffect(() => {
+    const savedTeacher = localStorage.getItem("teacherName");
+    const savedSubject = localStorage.getItem("subjectName");
+    const savedInvoice = localStorage.getItem("invoiceNumber");
+
+    if (savedTeacher) setTeacher(savedTeacher);
+    if (savedSubject) setSubject(savedSubject);
+    if (savedInvoice) setInvoiceNumber(Number(savedInvoice));
+  }, []);
+
+  // حفظ البيانات في LocalStorage عند التغيير
+  useEffect(() => {
+    localStorage.setItem("teacherName", teacher);
+  }, [teacher]);
+
+  useEffect(() => {
+    localStorage.setItem("subjectName", subject);
+  }, [subject]);
+
+  useEffect(() => {
+    localStorage.setItem("invoiceNumber", invoiceNumber);
+  }, [invoiceNumber]);
 
   const calculateTotal = () => {
     const totalPages = Number(copies) * Number(pagesPerCopy);
@@ -49,7 +73,7 @@ export default function Home() {
     const url = `https://wa.me/201122947479?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
 
-    setInvoiceNumber(invoiceNumber + 1);
+    setInvoiceNumber(invoiceNumber + 1); // يزيد رقم الفاتورة
   };
 
   const labelStyle = {
@@ -72,7 +96,7 @@ export default function Home() {
       {/* اللوجو */}
       <img src="/logo.png" alt="شعار مطبعة الرحاب" style={{ width: "300px", marginBottom: "20px" }} />
 
-      {/* إدخال البيانات داخل بلوك منسق */}
+      {/* إدخال البيانات */}
       <div style={{
         display: "inline-block",
         textAlign: "left",
